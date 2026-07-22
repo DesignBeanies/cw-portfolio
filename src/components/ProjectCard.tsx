@@ -22,7 +22,7 @@ export function ProjectCard({
   onSelect,
 }: ProjectCardProps) {
   const content = (
-    <>
+    <div className="relative z-[1] flex h-full flex-col">
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-surface-raised">
         <Image
           src={image}
@@ -49,7 +49,19 @@ export function ProjectCard({
           ))}
         </ul>
       </div>
-    </>
+    </div>
+  );
+
+  const cardClassName =
+    "project-card-interactive neon-border relative flex h-full flex-col overflow-hidden bg-surface";
+
+  const hoverLayer = (
+    <div aria-hidden className="project-card-hover-layer">
+      <span className="project-card-overlay" />
+      <span className="project-card-hover-cta neon-cta relative inline-flex min-h-[44px] items-center px-6 py-3 text-sm font-medium uppercase tracking-[0.15em]">
+        View project
+      </span>
+    </div>
   );
 
   if (onSelect) {
@@ -57,18 +69,18 @@ export function ProjectCard({
       <button
         type="button"
         onClick={onSelect}
-        className="focus-neon group w-full text-left"
+        className={`focus-neon ${cardClassName} w-full text-left`}
       >
-        <article className="neon-border flex h-full flex-col overflow-hidden bg-surface transition-colors hover:bg-surface-raised">
-          {content}
-        </article>
+        {content}
+        {hoverLayer}
       </button>
     );
   }
 
   return (
-    <article className="group neon-border flex flex-col overflow-hidden bg-surface transition-colors hover:bg-surface-raised">
+    <article className={cardClassName}>
       {content}
+      {hoverLayer}
     </article>
   );
 }

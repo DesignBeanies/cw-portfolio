@@ -245,6 +245,42 @@
     background-position: 0 0;
   }
 
+  .project-card-hover-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .project-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .project-card-hover-cta {
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0 20px rgba(255, 19, 240, 0.2);
+  }
+
+  .project-card-interactive:hover .project-card-hover-layer,
+  .project-card-interactive:focus-visible .project-card-hover-layer {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card-hover-layer {
+      transition: opacity 0.15s ease;
+    }
+  }
+
   .nav-active-glow {
     text-shadow: 0 0 8px currentColor;
   }

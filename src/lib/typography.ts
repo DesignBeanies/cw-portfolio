@@ -2,7 +2,7 @@
 
 /** h1–h4 outline stroke + transparent fill are set in globals.css base styles. */
 export const typeDisplay =
-  "font-display text-[48px] font-bold uppercase leading-[0.95] tracking-tight md:text-[72px]";
+  "font-display text-[48px] font-bold uppercase leading-[0.95] tracking-tight md:text-[88px]";
 
 export const typeSection =
   "font-display text-[32px] font-semibold uppercase leading-[1.1] tracking-wide md:text-[48px]";
