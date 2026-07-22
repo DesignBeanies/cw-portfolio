@@ -1,0 +1,36 @@
+---
+description: Before/after slider — full-frame layers + clip-path wipe
+globs: src/components/BeforeAfterSlider.tsx
+alwaysApply: false
+---
+
+# Before/After Slider
+
+## How the wipe works
+
+- **After** sits on the bottom layer, filling the frame (`absolute inset-0`, `fill`, `object-contain`)
+- **Before** sits on top in the **same full frame**, clipped with `clip-path` by handle position
+- The clip divides the **frame**, not a small image box — both layers must be `inset-0`
+
+```tsx
+<div className="relative overflow-hidden" style={{ height: 920 }}>
+  <div className="absolute inset-0">
+    <Image src={afterSrc} fill className="object-contain" unoptimized />
+  </div>
+  <div className="absolute inset-0" style={{ clipPath }}>
+    <Image src={beforeSrc} fill className="object-contain" unoptimized />
+  </div>
+</div>
+```
+
+## Avoid
+
+- Positioning images in small calculated boxes inside the frame — the clipped before region is mostly empty, so after bleeds through everywhere (looks like after is "not in the slider")
+- Per-image pixel layout with shared scale for "alignment" — breaks wipe when images don't fill the clip region
+- `h-auto w-auto` on Next `Image` (ignores computed box)
+
+## Image sizing
+
+- Fixed frame: `width: 100%`, `height: 920px`, `overflow: hidden`
+- `object-contain` on both — full image visible, no crop
+- `unoptimized` + cache-bust query strings when swapping assets in `projects.ts`

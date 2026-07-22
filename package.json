@@ -1,26 +1,31 @@
 {
-  "name": "portfolio-temp",
+  "name": "portfolio-2-0",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/dev.mjs",
+    "dev:clean": "rm -rf .next && node scripts/dev.mjs",
+    "preview": "npm run build && next start -p 3000",
+    "build": "node scripts/ensure-dev-stopped.mjs && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify:styling": "node scripts/verify-styling.mjs",
+    "verify": "npm run lint && npm run build && npm run verify:styling"
   },
   "dependencies": {
+    "framer-motion": "^12.42.2",
+    "next": "14.2.35",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.35"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.35"
+    "typescript": "^5"
   }
 }
